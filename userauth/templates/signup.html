@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title%} Signup {% endblock title%}
+
+{% block body%}
+
+<!-- ============ Page body ================ -->
+<div class="container-fluid px-0 mb-3">
+    <img src="/static/images/registration-1.jpg"  class="d-block w-100" alt="...">
+    <!--<img src="https://source.unsplash.com/1600x400/?register" class="d-block w-100" alt="...">-->
+</div>
+
+<div class="container py-4">
+    <h1>User Registration</h1>
+    <form action="" method="post">
+
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" class="form-control" id="txtUName" name="txtUName">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-control" id="txtFName" name="txtFName">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="txtLName" name="txtLName">
+        </div>
+
+        <!-- <div class="mb-3">
+        <label class="form-label">Phone</label>
+        <input type="text" class="form-control" id="txtPhone" name="txtPhone">
+      </div> -->
+        <div class="mb-3">
+            <label class="form-label">Email address</label>
+            <input type="email" class="form-control" id="txtEmail" name="txtEmail">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" id="txtPass" name="txtPass">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="txtConfPass" name="txtConfPass">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sign up</button>
+    </form>
+</div>
+
+<!-- ============ end Page body ================ -->
+
+{% endblock body%}

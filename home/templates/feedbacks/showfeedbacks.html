@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title%} All feedback {% endblock title%} 
+
+{% block body%}
+
+
+<style>
+  /* ---------- card ------------*/
+  .card {
+    border-radius: .7rem;
+  }
+
+  /* ---------- stars ------------*/
+  .checked {
+    color: orange;
+  }
+
+</style>
+
+<div class="container py-5">
+  <div class="row">
+    <section style="color: #000; background-color: #f3f2f2;">
+      <div class="container py-5">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-10 col-xl-8 text-center">
+            <h3 class="fw-bold mb-4">Feedbacks</h3>
+            <p class="mb-4 pb-2 mb-md-5 pb-md-0">
+              Thank you for your comments.
+            </p>
+          </div>
+        </div>
+    
+        <div class="row text-center">
+          {% for fb in fblist %}
+          <div class="col-md-4 mb-4 mb-md-0">
+            <div class="card mb-3" style="border-radius: .7rem;">
+              <div class="card-body py-4 mt-2">
+                <!-- Customer photo -->
+                <div class="d-flex justify-content-center mb-4">
+                  <img src="/static/images/user.jpg" class="rounded-circle shadow-1-strong" width="100" height="100" />
+                </div>
+                <!-- CUSTOMER name -->
+                <h5 class="font-weight-bold">{{fb.cname}}</h5>
+                <!-- Feedback date -->
+                <h6 class="font-weight-bold my-3">{{fb.fbdate}}</h6>
+                <!-- Rating star -->
+
+                
+                <ul class="list-unstyled d-flex justify-content-center">
+                {% if fb.rating > 0 %}
+                  <li><i class="fa fa-star fa-sm {% if fb.rating  >= 1 %} checked {% endif %} "></i></li>
+                  <li><i class="fa fa-star fa-sm {% if fb.rating  >= 2 %} checked {% endif %} "></i></li>
+                  <li><i class="fa fa-star fa-sm {% if fb.rating  >= 3 %} checked {% endif %} "></i></li>
+                  <li><i class="fa fa-star fa-sm {% if fb.rating  >= 4 %} checked {% endif %} "></i></li>
+                  <li><i class="fa fa-star fa-sm {% if fb.rating  >= 5 %} checked {% endif %} "></i></li>
+                  
+                {% else %}  <!-- NO Rating given-->
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i> <span>No ratings</span></li>
+                {% endif %}
+              </ul>
+
+                <p class="mb-2">
+                  <i class="fas fa-quote-left pe-2"></i> {{fb.fbdesc}}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {% endfor %}
+          
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+{% endblock body%} 
+
+
+{% comment %}
+ <ul class="list-unstyled d-flex justify-content-center">
+  <li><i class="fas fa-star fa-sm text-info"></i></li>
+  <li><i class="fas fa-star fa-sm text-info"></i></li>
+  <li><i class="fas fa-star-empty fa-sm text-info"></i></li>
+  <li><i class="fas fa-star fa-sm text-info"></i></li>
+  <li><i class="fas fa-star-half-alt fa-sm text-info"></i></li>
+</ul>
+ {% endcomment %}

@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title%} Edit fedback {% endblock title%}
+
+{% block style %}
+<style>
+
+  .checked {
+    color: orange;
+  }
+  
+  .rating {
+    /* margin-top: 40px; */
+    border: none;
+    float: left;
+  
+  }
+  
+  .rating > label {
+     color: #9C9C9C;
+    font-size: 7px;
+    float:right;
+  }
+  
+  
+  .rating > label:before {
+    margin: 5px;
+    font-size: 2em;
+    font-family: FontAwesome;
+    content: "\f005";
+    display: inline-block;
+  }
+  
+  .rating > input {
+    display: none;
+  }
+  
+  .rating > input:checked ~ label,
+  .rating:not(:checked) > label:hover,
+  .rating:not(:checked) > label:hover ~ label {
+    color: #F79426;
+  }
+  
+  .rating > input:checked + label:hover,
+  .rating > input:checked ~ label:hover,
+  .rating > label:hover ~ input:checked ~ label,
+  .rating > input:checked ~ label:hover ~ label {
+    color: #FECE31;
+  }
+  
+  
+  #star{
+  font-size: 10px;
+  color:grey;
+  }
+  
+  #check-star{
+  font-size: 10px;
+  }
+  
+  </style>
+
+{% endblock style %}
+
+{% block body%}
+
+<!-- ============ Page body ================ -->
+<div class="container-fluid px-0 mb-3">
+    <!-- <img src="https://source.unsplash.com/1600x400/?review" class="d-block w-100" alt="..."> -->
+    <img src="/static/images/fbedit.jpg" class="d-block w-100" alt="...">
+</div>
+
+<div class="container py-4">
+  <h1>Edit your feedback here</h1>
+  <form action="" method="POST"> <!-- Name of the view that will handle the request is editorder, HERE it is "", it gets the target from the URL which is the view/id/  -->
+    {% csrf_token %}
+
+    <!-- ******** retrieving data from single object ********-->
+    {% with data=selfb %}   
+    
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <input type="text" class="form-control" id="txtName" name="txtName" value="{{data.cname}}">  <!-- retrieve data -->
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Phone</label>
+      <input type="text" class="form-control" id="txtPhone" name="txtPhone" value="{{data.cphn}}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Email address</label>
+      <input type="email" class="form-control" id="txtEmail" name="txtEmail" placeholder="name@example.com" value="{{data.cemail}}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Order details</label>
+      <textarea class="form-control" id="txtDesc" name="txtDesc" rows="3">{{data.fbdesc}}</textarea>
+    </div>
+    <div class="mb-3">
+      <div class="form-group required">
+        <div class="rating">
+  
+            <input type="radio" id="star5" name="rating" value="5" />
+            <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
+            <input type="radio" id="star4" name="rating" value="4" />
+            <label class="star" for="star4" title="Great" aria-hidden="true"></label>
+            <input type="radio" id="star3" name="rating" value="3" />
+            <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
+            <input type="radio" id="star2" name="rating" value="2" />
+            <label class="star" for="star2" title="Good" aria-hidden="true"></label>
+            <input type="radio" id="star1" name="rating" value="1" />
+            <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
+  
+          </div>
+        
+      </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+    {% endwith %}
+  </form>
+</div>
+
+<!-- ============ end Page body ================ -->
+
+{% endblock body%}

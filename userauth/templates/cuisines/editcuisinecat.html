@@ -1,0 +1,30 @@
+
+{% extends "base.html" %}
+{% comment %} {% extends "navbar.html" %} {% endcomment %}
+
+{% block title%} Cuisine edit {% endblock title%}
+
+{% block body%}
+
+<!-- ============ Page body ================ -->
+<div class="container py-4">
+  <h1>Edit Cuisines</h1>
+
+  {% if save_status %}
+       Your data was saved!!
+  {% else %}
+      
+  
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ mform.as_p }}
+     
+
+    <button type="submit" class="btn btn-secondary">Update</button>
+  </form>
+  {% endif%}
+</div>
+<!-- ============ end Page body ================ -->
+
+{% endblock body%}

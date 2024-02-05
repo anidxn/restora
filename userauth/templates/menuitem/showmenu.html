@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% comment %} {% extends "navbar.html" %} {% endcomment %}
+
+{% block title%} Menu items {% endblock title%} 
+
+{% block body%}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>All menu items </h1>
+            {% if menu_list %}
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">desc</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">category</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for data in menu_list %}
+                  <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{data.name}}</td>
+                    <td>{{data.desc}}</td>
+                    <td>{{data.price}}</td>
+                    <td>{{ data.menu_cat }}
+                    </td>
+                    <td>
+                      <a href="{% url 'edit-menuitem' data.menu_id %}" class="btn btn-outline-info btn-sm"><i class="fas fa-pencil" ></i></a>
+                      <a href="{% url 'delete-menuitem' data.menu_id %}" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></a>
+                  </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table> 
+              {% else %}
+                No menu items found
+              {% endif %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock body%} 

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% comment %} {% extends "navbar.html" %} {% endcomment %}
+
+{% block title%} Search food {% endblock title%} 
+
+{% block body%}
+
+<div class="container-fluid px-0 mb-3">
+  <img src="/static/images/menu.jpg" class="d-block w-100" alt="...">
+</div>
+
+<div class="container">
+  {% if user.is_authenticated %}
+    Hello {{user.first_name}}
+{% else %}
+    Hello user
+{% endif %}
+    <div class="row">
+        <div class="col-md-12">
+            <h1>You searched for "{{ searched }}"</h1>
+            {% if foods %}
+            <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for food in foods %}
+                  <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{food.name}}</td>
+                    <td>{{food.desc}}</td>
+                    <td>{{food.price}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table> 
+              {% else %}
+                No orders found
+              {% endif %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock body%} 

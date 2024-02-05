@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% comment %} {% extends "navbar.html" %} {% endcomment %}
+
+{% block title%} Edit menu {% endblock title%}
+
+{% block body%}
+
+<!-- ============ Page body ================ -->
+<div class="container py-4">
+  <h1>Edit menu item</h1>
+  
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ mform.as_p }}
+     
+
+    <button type="submit" class="btn btn-secondary">Update</button>
+  </form>
+
+</div>
+<!-- ============ end Page body ================ -->
+
+{% endblock body%}

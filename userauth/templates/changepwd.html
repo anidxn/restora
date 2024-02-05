@@ -1,0 +1,43 @@
+
+{% extends "base.html" %}
+{% comment %} {% extends "navbar.html" %} {% endcomment %}
+
+{% block title%} Contacts {% endblock title%}
+
+{% block body%}
+
+<div class="container py-4">
+    {% if user.is_authenticated %}
+    Welcome {{user.username}}
+
+{% else %}
+    Please login to access this page. Click <a href="{% url 'login' %}">here</a> to login.
+{% endif %}
+
+    <h1>Change password</h1>
+    <form action="" method="post">
+
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label class="form-label">Old Password</label>
+            <input type="password" class="form-control" id="txtOPass" name="txtOPass">
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" id="txtPass" name="txtPass">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="txtConfPass" name="txtConfPass">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Change password</button>
+    </form>
+</div>
+
+
+<!-- ============ end Page body ================ -->
+
+{% endblock body%}

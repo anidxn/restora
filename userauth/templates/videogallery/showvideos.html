@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% comment %} {% extends "navbar.html" %} {% endcomment %}
+
+{% block title%} Services {% endblock title%} 
+
+{% block body%}
+
+<div class="container">
+    {% if vidlist %}
+    {% for data in vidlist %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-center mt-2 mb-2">{{data.caption}}<h3>
+            <video class="embed-responsive embed-responsive-16by9" controls=controls"">    
+            <!--<video class="embed-responsive" autoplay loop muted>-->
+                <source src="{{ data.vid_file.url }}" type="video/mp4" />
+            </video>
+            <a href="{% url 'delete-video' data.id %}" class="btn btn-danger btn-sm">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% else %}
+         No videos found
+    {% endif %}
+</div>
+
+{% endblock body%} 
