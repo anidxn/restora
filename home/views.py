@@ -126,7 +126,7 @@ def search_food(request):
         #------ filter records from db using ORM -------
         searched_food = request.POST['txtSearch']
         
-        food_list = MenuItem.objects.filter(name__contains=searched_food)  # list of objects
+        food_list = MenuItem.objects.filter(name__icontains=searched_food)  # list of objects
         # ----- embed the records as context & send to page --------
         return render(request, 'menuitem/searchedfood.html', {'searched': searched_food, 'foods' : food_list})
     # else:
