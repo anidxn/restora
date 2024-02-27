@@ -1,6 +1,8 @@
 import os
 from django.shortcuts import redirect, render
-from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
+from django.http import HttpResponse, HttpRequest
+# ----- for ilike with OR in query------
+from django.db.models import Q
 from userauth.utilities import *
 
 #----- for messages framework -------
@@ -126,7 +128,9 @@ def search_food(request):
         #------ filter records from db using ORM -------
         searched_food = request.POST['txtSearch']
         
-        food_list = MenuItem.objects.filter(name__icontains=searched_food)  # list of objects
+        # food_list = MenuItem.objects.filter(name__icontains=searched_food)  # list of objects
+        food_list = MenuItem.objects.filter(Q(name__icontains=searched_food) | Q(desc__icontains = searched_food))      # * * Query with OR operator * *
+
         # ----- embed the records as context & send to page --------
         return render(request, 'menuitem/searchedfood.html', {'searched': searched_food, 'foods' : food_list})
     # else:
