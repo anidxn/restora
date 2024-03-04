@@ -14,6 +14,11 @@ class CuisineCategory(models.Model):
     def __str__(self):
         return self.csn_cat_name
     
+    #----- decoration under adminpanel -----
+    class Meta:
+        verbose_name_plural = 'CuisineCategories'  # otherwise it will appear as Cuisine Categorys
+        ordering = ['csn_cat_name']
+    
 #============ Menu item ==============
 class MenuItem(models.Model):
     menu_id = models.AutoField(primary_key=True)
