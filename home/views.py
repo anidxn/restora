@@ -25,6 +25,9 @@ from reportlab.lib.pagesizes import letter
 # -------import for csv file generation ---------
 import csv
 
+#---------- to be used with aggregate & group by ------------
+from django.db.models import Count
+
 #-----------------------------------
 #   Create your views here.
 #-----------------------------------
@@ -35,9 +38,19 @@ def index_page(request):
     # >> Phase - i
     # return render(request, 'index.html')
 
-    # phese - ii (after addition of product category)
+    # >> Phase - ii (after addition of product category)
     cuisines = CuisineCategory.objects.all()
-    return render(request, 'index.html', {'cuisines' : cuisines})
+    result = MenuItem.objects.values('menu_cat').annotate(group_count=Count('menu_id'))     # SQL: select count(menu_id) as group_count from MenuItem group by menu_cat
+    # print('Count result: ', result)    <QuerySet [{'menu_cat': 1, 'group_count': 1}, {'menu_cat': 2, 'group_count': 1}, {'menu_cat': 3, 'group_count': 3}, {'menu_cat': 4, 'group_count': 2}]>
+    
+    # store result in dictionary 
+    item_count = {}     # item_count = {"1": 1, "2" :1 , "3" : 3, "4": 2}
+    for entry in result:
+        item_count[str(entry['menu_cat'])] = entry['group_count']
+
+    # print("Item count dictionary : " , item_count)
+    
+    return render(request, 'index.html', {'cuisines' : cuisines, 'itm_qnty' : item_count})
 
 #-----------------------------------------
 #           Create a feedback

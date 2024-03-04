@@ -54,6 +54,9 @@
     </button>
   </div>
 
+  <!-- =========== loading custom built filters ============== -->
+  {% load pj_filters %}
+
   <!-- ====== album ===============-->
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
@@ -73,6 +76,14 @@
             <div class="card-body">
               <h5 class="card-title">{{ cuisine.csn_cat_name }}</h5>
               <p class="card-text">{{ cuisine.csn_cat_desc }}</p>
+
+              <div class="d-flex justify-content-between align-items-center">
+                {% comment %} <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div> {% endcomment %}
+                <small class="text-body-secondary">{{ itm_qnty|getval_by_key:cuisine.id }} items</small>
+              </div>
               
             </div>
           </div>
