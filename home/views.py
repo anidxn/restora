@@ -27,6 +27,8 @@ import csv
 
 #---------- to be used with aggregate & group by ------------
 from django.db.models import Count
+# The decorator is required to check if view is called by a post request or not
+from django.views.decorators.http import require_POST
 
 #-----------------------------------
 #   Create your views here.
@@ -136,8 +138,12 @@ def delete_feedback(request, fbkid):
     messages.warning(request, "Your feedback is deleted.")
     return redirect('/allfeedback/allfeedback')
 
+#-----------------------------------------
+#           SEARCH a food menu
+#-----------------------------------------
+@require_POST
 def search_food(request):
-    if request.method == "POST":
+    #if request.method == "POST":
         #------ filter records from db using ORM -------
         searched_food = request.POST['txtSearch']
         
@@ -146,9 +152,7 @@ def search_food(request):
 
         # ----- embed the records as context & send to page --------
         return render(request, 'menuitem/searchedfood.html', {'searched': searched_food, 'foods' : food_list})
-    # else:
-    #     messages.warning(request, 'Please search with a valid keyword !!')
-    #     return render(request, 'index.html')
+
 
 #-----------------------------------------------------------------------------
 #        Display list of menu items based an Cuisine category selected
