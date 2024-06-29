@@ -7,14 +7,13 @@
 {% block body%}
 
 
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">
           {% if user.is_authenticated %}
             Hello {{user.first_name}}
           {% else %}
-           Hello user
+           Hello Dear User
           {% endif %}
           <hr>
             <h1>All bookings </h1>
